@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Cake</title>
+<style>
+body{
+    display:flex;
+    height:100vh;
+    align-items: center;
+    justify-content:center;
+    overflow: hidden;
+    background-color: #000000;
+}
+#birthday-cake{
+    position: relative;
+    top:50px;
+    left:0;
+}
+#birthday-cake:before{
+    content:"";
+    position: absolute;
+    background-color: #7b0581;
+    width: 400px;
+    height: 140px;
+    border-radius: 50%;
+    transform: translate(-50%, -10%);
+    box-shadow: inset -2px -5px #e6ccb2;
+}
+.cake{
+    position: absolute;
+    background-color: #371d03;
+    width: 350px;
+    height: 130px;
+    transform: translate(-50%,-60%);
+}
+.cake:before, .cake:after{
+    content:"";
+    position: absolute;
+}
+.cake:before, .middle, .middle:before{
+    border-radius: 50% 50% 50% 50%/0% 0% 100% 100%;
+    width: 350px;
+    height: 50px;
+}
+.cake:before{
+    background-color: #371d03;
+    top:130px;
+}
+.cake:after{
+    background-color: #4d280a;
+    width: 350px;
+    height: 30px;
+    top: 50px;
+}
+.middle{
+    position: absolute;
+    background-color: #4d280a;
+    top: 80px;
+    z-index:1;
+}
+.middle:before{
+    content:"";
+    position: absolute;
+    background-color:#371d03;
+    top: -35px;
+}
+.top{
+    position: absolute;
+    background-color: #291506;
+    width: 350px;
+    height: 90px;
+    border-radius: 50%;
+    z-index:2;
+    top: -45px;
+
+    box-shadow:
+        
+        inset 30px -5px rgba(255,255,255,0.05);
+}
+.chocs{
+    position: absolute;
+    width: 400px;
+    height: 90px;
+    top:0;
+    z-index:1;
+}
+.choc{
+    position: absolute;
+    width: 50px;
+    height: 80px;
+    background-color: #291506;
+    border-radius:50% 50% 50% 50%/0% 0% 100% 100%;
+}
+
+
+.choc:nth-child(1){ top:0; left:0; }
+.choc:nth-child(2){ top:-5px; left:50px; }
+.choc:nth-child(3){ top:-10px; left:100px; }
+.choc:nth-child(4){ top:-12px; left:150px; }
+.choc:nth-child(5){ top:-10px; left:200px; }
+.choc:nth-child(6){ top:-5px; left:250px; }
+.choc:nth-child(7){ top:0; left:300px; }
+.choc:nth-child(8){ top:2px; left:350px; }
+
+
+.candles{
+    position: absolute;
+    top:-145px;
+    left:-70px;
+    box-shadow: 50px 20px #7b0581, -50px 20px #7b0581;
+}
+.candle{
+    position: absolute;
+    width: 20px;
+    height: 80px;
+    border-radius:10px 10px 0 0;
+
+    background: linear-gradient(
+        90deg,
+        #4e0351,
+        #7b0581 35%, 
+        #b23bb8 50%,
+        #7b0581 70%, 
+        #3a023c
+    );
+
+    box-shadow:
+        inset -3px 0 5px rgba(0,0,0,0.3),
+        inset 2px 0 4px rgba(255,255,255,0.3);
+}
+.candle::before{
+    content:"";
+    position:absolute;
+    width:24px;
+    height:6px;
+    background:#7f5539; 
+    bottom:-2px;
+    left:-2px;
+    border-radius:50%;
+}
+.candle::after{
+    content:"";
+    position:absolute;
+    width:22px;
+    height:6px;
+    background:rgba(0,0,0,0.35);
+    bottom:-3px;
+    left:-1px;
+    border-radius:50%;
+    filter: blur(2px);
+}
+.candle::before,
+.candle::after{
+    display:none;
+}
+.candle:nth-child(1){ left:0; }
+.candle:nth-child(2){ left:60px; }
+.candle:nth-child(3){ left:120px; }
+
+.flame{
+    position: absolute;
+    width:20px;
+    height:30px;
+    background-color: rgba(252,191,73,.8);
+    top:-35px;
+    left:0;
+    border-radius: 50% 50% 50% 50%;
+    animation: flame 1.1s infinite;
+}
+.flame2{ left:60px; }
+.flame3{ left:120px; }
+.sakura {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    z-index: 3; 
+}
+
+
+.sakura::before,
+.sakura::after,
+.sakura span,
+.sakura i,
+.sakura b {
+    content: "";
+    position: absolute;
+    width: 12px;
+    height: 20px;
+    background: radial-gradient(circle at 50% 50%, #ffc0cb 0%, #ff87b9 70%);
+    border-radius: 50% 50% 50% 50%;
+    transform-origin: bottom center;
+}
+
+
+.sakura::before { transform: rotate(0deg) translateY(-10px) translateX(0px); }
+.sakura::after { transform: rotate(72deg) translateY(-10px) translateX(0px); }
+.sakura span { transform: rotate(144deg) translateY(-10px) translateX(0px); }
+.sakura i { transform: rotate(216deg) translateY(-10px) translateX(0px); }
+.sakura b { transform: rotate(288deg) translateY(-10px) translateX(0px); }
+
+
+.sakura-center {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #ff3366;
+    border-radius: 50%;
+    top: 7px;
+    left: 7px;
+}
+
+@keyframes flame{
+    0%,25%,100%{transform: scaleY(1);}
+    50%,75%{transform: scaleY(1.2);}
+}
+@keyframes billboard {
+    0%{
+        left: -100%;
+    }
+    100%{
+        left: 100%;
+    }
+}
+@keyframes centerShow{
+    0%{
+        left:50%;
+        transform:translateX(-50%);
+        opacity:0;
+    }
+    20%{
+        opacity:1;
+    }
+    80%{
+        left:50%;
+        transform:translateX(-50%);
+        opacity:1;
+    }
+    100%{
+        left:-100%;
+        transform:none;
+    }
+}
+
+.sakura {
+    animation: sway 2s ease-in-out infinite;
+    transform-origin: bottom center; 
+}
+
+.text, .text2{
+    position: absolute;
+    color: white;
+    font-family:"Brush Script MT",cursive;
+    text-align:center;
+}
+.text{
+    position: absolute;
+    white-space: nowrap;
+    color: white;
+    font-family: "Brush Script MT", cursive;
+    font-size: 90px;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    opacity:0;
+}
+.text2{
+    width: 600px;
+    font-size:25px;
+    left:460px;
+    top:600px;
+}
+</style>
+</head>
+<body>
+<audio id="birthday-music" src="bday.mp3" loop></audio>
+<div id="birthday-cake">
+    <div class="cake">
+    <div class="middle"></div>
+    <div class="chocs">
+        <div class="choc"></div>
+        <div class="choc"></div>
+        <div class="choc"></div>
+        <div class="choc"></div>
+        <div class="choc"></div>
+        <div class="choc"></div>
+        <div class="choc"></div>
+    </div>
+    <div class="top"></div>
+</div>
+<div class="candles">
+    <div class="sakura" style="top:70px; left:100px;">
+    <div class="sakura" style="top:5px; left:30px;"><div class="sakura-center"></div></div>
+    <div class="sakura" style="top:5px; left:-60px;"><div class="sakura-center"></div></div>
+    <div class="sakura" style="top:5px; left:-40px;"><div class="sakura-center"></div></div>
+     <div class="sakura" style="top:7px; left:-10px;"><div class="sakura-center"></div></div>
+     <div class="sakura" style="top:5px; left:-90px;"><div class="sakura-center"></div></div>
+     <div class="sakura" style="top:5px; left:-110px;"><div class="sakura-center"></div></div>
+          <div class="sakura" style="top:-2px; left:-130px;"><div class="sakura-center"></div></div>
+ <div class="sakura" style="top:-2px; left:40px;"><div class="sakura-center"></div></div>
+        <div class="sakura-center"></div>
+    </div>
+
+    <div class="candle"></div>
+    <div class="candle"></div>
+    <div class="candle"></div>
+
+    <div class="flame"></div>
+    <div class="flame flame2"></div>
+    <div class="flame flame3"></div>
+</div>
+</div>
+
+<div class="text">Happy Birthday!!!</div>
+<div class="text2">blow the candles love</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function(){
+    const audio = document.getElementById("birthday-music");
+    audio.volume = 0.5; 
+
+ function blowOutCandles() {
+    $(".flame, .flame2, .flame3").fadeOut("fast");
+    $(".text").css({ opacity:1, animation:"centerShow 3s forwards" });
+
+    setTimeout(function(){
+        $(".text").css({ animation:"billboard 8s linear infinite" });
+    },3000);
+
+    const audio = document.getElementById("birthday-music");
+    audio.volume = 0.5;
+
+
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+        playPromise.catch(err => {
+            alert("Üfleme algılandı! Müzik çalması için ekrana tıklayın.");
+            $(document).one("click", function() {
+                audio.play();
+            });
+        });
+    }
+}
+
+  
+    navigator.mediaDevices.getUserMedia({ audio: true })
+    .then(stream => {
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const mediaStreamSource = audioContext.createMediaStreamSource(stream);
+        const analyser = audioContext.createAnalyser();
+        analyser.fftSize = 256;
+        mediaStreamSource.connect(analyser);
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+        function detectBlow() {
+            analyser.getByteFrequencyData(dataArray);
+            let sum = 0;
+            for(let i=0; i<dataArray.length; i++){
+                sum += dataArray[i];
+            }
+            const average = sum / dataArray.length;
+
+            if(average > 70){  
+                blowOutCandles();
+                return; 
+            }
+            requestAnimationFrame(detectBlow);
+        }
+
+        detectBlow();
+    })
+    .catch(err => {
+        console.error("Mikrofon erişimi reddedildi:", err);
+    });
+});
+</script>
+</body>
+</html>
